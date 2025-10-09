@@ -36,11 +36,11 @@ public class PlayerController : MonoBehaviour
     
     void HandleInput()
     {
-        // Get input for movement - using both Input.GetAxis and direct key detection
+        
         float horizontal = 0f;
         float vertical = 0f;
         
-        // Direct key input (more reliable)
+       
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             vertical = 1f;
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
@@ -51,14 +51,14 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             horizontal = -1f;
         
-        // Fallback to Input.GetAxis if direct keys don't work
+        
         if (horizontal == 0f && vertical == 0f)
         {
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
         }
         
-        // Calculate movement direction (world space for simplicity)
+       
         movement = new Vector3(horizontal, 0f, vertical).normalized;
         
         // Debug input
@@ -91,10 +91,10 @@ public class PlayerController : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
         }
         
-        // Combine horizontal movement with vertical velocity
+        
         Vector3 finalMovement = move + Vector3.up * velocity.y;
         
-        // Apply movement
+        
         characterController.Move(finalMovement * Time.deltaTime);
         
         // Debug movement
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
     {
         if (animator != null)
         {
-            // Set animation parameters
+           
             animator.SetFloat("Speed", movement.magnitude);
             animator.SetBool("IsMoving", movement.magnitude > 0.1f);
         }

@@ -35,7 +35,7 @@ public class ChaseState : State
         if (enemy.GetDistanceToPlayer() < 1.5f)
         {
             Debug.Log("Player caught!");
-            // In a real game, you might trigger a game over or respawn here
+            // Handle player caught logic here
             enemy.ChangeToIdle();
         }
     }
