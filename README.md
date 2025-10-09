@@ -1,5 +1,53 @@
 # CISC486-Game-Development-F25
 # Robotrap
+## Finite State Machine (FSM) Design
+
+### FSM Diagram
+```
+    [IDLE] 
+      |  
+      | (wait time expires)
+      v  
+   [PATROL] ←→ [CHASE]
+      |           |
+      |           | (player out of range)
+      |           v
+      └─────→ [IDLE]
+```
+
+### State Descriptions and Transitions
+
+#### 1. IDLE State
+- **Behavior**: Enemy stops moving and waits in place
+- **Visual**: Red material/color
+- **Duration**: 2 seconds
+- **Transitions**:
+  - To PATROL: When wait time expires
+  - To CHASE: If player enters detection range (8 units) and is visible
+
+#### 2. PATROL State  
+- **Behavior**: Enemy moves between predefined patrol points at normal speed
+- **Visual**: Blue material/color
+- **Speed**: 2 units/second
+- **Transitions**:
+  - To CHASE: If player enters detection range (8 units) and is visible
+  - To IDLE: If no patrol points are set
+
+#### 3. CHASE State
+- **Behavior**: Enemy actively pursues the player at increased speed
+- **Visual**: Yellow material/color  
+- **Speed**: 4 units/second
+- **Transitions**:
+  - To IDLE: If player moves beyond lose range (12 units) or becomes invisible
+  - To IDLE: If enemy catches player (within 1.5 units)
+
+### Technical Implementation
+- Uses Unity's NavMeshAgent for pathfinding
+- Line-of-sight checking with raycasting
+- Distance-based detection system
+- Visual state feedback through material changes
+
+## Original Game Concept (Extended Features)
 
 ## Overview
 Robotrap is a 2D maze game where the players goal is to navigate a maze (as a robot) and rescue a trapped ally while avoiding patrolling enemy drones.
