@@ -1,7 +1,8 @@
 # CISC486-Game-Development-F25
 # Robotrap
 ## Finite State Machine (FSM) Design
-
+## Assignment 2 YT Vid
+https://youtu.be/jX8C1Z_nSFo
 ### FSM Diagram
 ```
     [IDLE] 
