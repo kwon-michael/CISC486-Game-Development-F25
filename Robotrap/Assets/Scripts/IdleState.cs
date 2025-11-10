@@ -12,7 +12,7 @@ public class IdleState : State
     
     public override void Enter()
     {
-        Debug.Log("Enemy entering IDLE state");
+        Debug.Log("Enemy entering IDLE state - Standing guard");
         enemy.GetAgent().speed = 0f;
         enemy.GetAgent().isStopped = true;
         enemy.SetMaterial(enemy.GetIdleMaterial());
@@ -23,16 +23,18 @@ public class IdleState : State
     {
         idleTimer += Time.deltaTime;
         
-        // Check if player is in detection range
+        // Priority decision: Check if player is in detection range (FSM Decision-Making)
         if (enemy.GetDistanceToPlayer() <= enemy.GetDetectionRange() && enemy.CanSeePlayer())
         {
+            Debug.Log("Player detected during idle! Switching to Chase");
             enemy.ChangeToChase();
             return;
         }
         
-        // After waiting, start patrolling
+        // After waiting, start patrolling (FSM State Transition Logic)
         if (idleTimer >= enemy.GetWaitTime())
         {
+            Debug.Log("Idle wait complete, beginning patrol");
             enemy.ChangeToPatrol();
         }
     }
